@@ -1,4 +1,4 @@
-# Logitech Media Server
+# Z80Pack
 
 Docker image for Z80 emulation of CP/M 1, CP/M 2, CP/M 3 and MP/M II using Z80Pack
 
