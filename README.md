@@ -16,5 +16,8 @@ z80pack
 
 Changes:
 
+2017-07-16
+- Add the cpm13 and cpm14 scripts to /config folder.
+
 2017-07-12
 - Initial release.
