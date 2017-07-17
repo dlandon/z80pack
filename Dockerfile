@@ -71,8 +71,9 @@ RUN \
 	adduser "vintage" sudo && \
 	echo "vintage:computer" | chpasswd && \
 
-	# Add white on black screen default to shell in a box
-	echo "OPTS='--css white-on-black.css'" >> "/etc/default/shellinabox" && \
+	# Set white on black screen as default to shell in a box
+	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabox/options-enabled/00_Black on White.css" && \
+	mv "/etc/shellinabox/options-enabled/00_White On Black.css" "/etc/shellinabox/options-enabled/00+White On Black.css" && \
 
 	# Clean APT install files
 	apt-get clean -y
