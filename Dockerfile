@@ -72,7 +72,7 @@ RUN \
 	echo "vintage:computer" | chpasswd && \
 
 	# Add white on black screen default to shell in a box
-	echo "OPTS=--css white-on-black.css" >> "/etc/default/shellinabox" && \
+	echo "OPTS='--css white-on-black.css'" >> "/etc/default/shellinabox" && \
 
 	# Clean APT install files
 	apt-get clean -y
