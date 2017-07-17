@@ -21,7 +21,7 @@ To access the shell in a box gui: https://IP:4200
 
 You will be taken directly to the /root/z80pack/cpmsim directory.
 
-Use the command 'sudo ./cpm' to run the simulator with root priviledges.
+Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
