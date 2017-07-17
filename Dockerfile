@@ -26,6 +26,7 @@ RUN \
 	apt-get -y dist-upgrade && \
 	apt-get -y install wget tzdata make gcc nano && \
 	apt-get -y install libncurses5-dev libncursesw5-dev && \
+	apt-get -y install shellinabox sudo && \
 
 	# Install z80pack and complie modules.
 	cd ~ && \
@@ -65,10 +66,20 @@ RUN \
 
 	chmod -R +x /etc/my_init.d/ && \
 
+	# Create user account for shell in a box
+	useradd -d "/root/z80pack/cpmsim/" "vintage" && \
+	adduser "vintage" sudo && \
+	echo "vintage:computer" | chpasswd && \
+
+	# Add white on black screen default to shell in a box
+	echo "OPTS=--css white-on-black.css" >> "/etc/default/shellinabox" && \
+
 	# Clean APT install files
 	apt-get clean -y
 
 VOLUME \
 	/config \
+
+EXPOSE 4200
 
 CMD ["/sbin/my_init"]

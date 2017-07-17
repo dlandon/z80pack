@@ -95,9 +95,16 @@ usermod -d /config nobody
 chown -R nobody:users /config
 chmod -R go+rw /config
 
+# Change permissions on /root
+chown -R nobody:users /root
+chmod -R 777 /root
+
 # Get docker env timezone and set system timezone
 echo "Setting the timezone to : $TZ"
 echo $TZ > /etc/timezone
 ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
 dpkg-reconfigure tzdata
 echo "Date: `date`"
+
+# Start shell in a box
+service shellinabox start
