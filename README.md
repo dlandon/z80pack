@@ -25,8 +25,11 @@ Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
+2017-07-30
+- Adjusted permissions on /root/z80pack.
+
 2017-07-17
-- Add shell in a box for gui access to the Docker.
+- Add shell in a box for web gui access to the Docker.
 
 2017-07-16
 - Add the cpm13 and cpm14 scripts to /config folder.

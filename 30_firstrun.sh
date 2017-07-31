@@ -96,8 +96,8 @@ chown -R nobody:users /config
 chmod -R go+rw /config
 
 # Change permissions on /root
-chown -R nobody:users /root
-chmod -R 777 /root
+chown -R root:root /root/z80pack
+chmod 755 /root
 
 # Get docker env timezone and set system timezone
 echo "Setting the timezone to : $TZ"
@@ -107,4 +107,5 @@ dpkg-reconfigure tzdata
 echo "Date: `date`"
 
 # Start shell in a box
+echo "Starting Shell in a Box..."
 service shellinabox start
