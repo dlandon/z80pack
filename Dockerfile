@@ -25,7 +25,11 @@ RUN \
 	apt-get -y upgrade && \
 	apt-get -y dist-upgrade && \
 	apt-get -y install wget tzdata make gcc nano && \
+
+	# z80pack
 	apt-get -y install libncurses5-dev libncursesw5-dev && \
+
+	# Shell in a box
 	apt-get -y install shellinabox sudo && \
 
 	# Install z80pack and complie modules.
@@ -62,8 +66,6 @@ RUN \
 	cd ~/z80pack/cpmsim/disks/library && \
 	cp -p * ../backups && \
 
-	apt-get -y remove wget && \
-
 	chmod -R +x /etc/my_init.d/ && \
 
 	# Create user account for shell in a box
@@ -75,7 +77,9 @@ RUN \
 	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabox/options-enabled/00_Black on White.css" && \
 	mv "/etc/shellinabox/options-enabled/00_White On Black.css" "/etc/shellinabox/options-enabled/00+White On Black.css" && \
 
-	# Clean APT install files
+	# Remove unneeded packages and clean APT install files
+	apt-get -y autoremove && \
+	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
 	apt-get clean -y
 
 VOLUME \
