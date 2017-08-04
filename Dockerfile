@@ -34,10 +34,10 @@ RUN \
 
 	# Install z80pack and complie modules.
 	cd ~ && \
-	wget http://www.autometer.de/unix4fun/z80pack/ftp/z80pack-1.34.tgz && \
-	tar xzvf z80pack-1.34.tgz && \
-	mv z80pack-1.34 z80pack	&& \
-	rm z80pack-1.34.tgz && \
+	wget http://www.autometer.de/unix4fun/z80pack/ftp/z80pack-1.35.tgz && \
+	tar xzvf z80pack-1.35.tgz && \
+	mv z80pack-1.35 z80pack	&& \
+	rm z80pack-1.35.tgz && \
 
 	# Compile simulator.
 	cd ~/z80pack/cpmsim/srcsim && \
@@ -69,7 +69,7 @@ RUN \
 	chmod -R +x /etc/my_init.d/ && \
 
 	# Create user account for shell in a box
-	useradd -d "/root/z80pack/cpmsim/" "vintage" && \
+	useradd -d "/root/z80pack/cpmsim" "vintage" && \
 	adduser "vintage" sudo && \
 	echo "vintage:computer" | chpasswd && \
 
