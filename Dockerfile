@@ -77,9 +77,9 @@ RUN \
 	mv "/etc/shellinabox/options-enabled/00_White On Black.css" "/etc/shellinabox/options-enabled/00+White On Black.css" && \
 
 	# Remove unneeded packages and clean APT install files
-	apt-get -y autoremove && \
 	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
-	apt-get clean -y
+	apt-get clean -y && \
+	apt-get -y autoremove
 
 VOLUME \
 	/config \

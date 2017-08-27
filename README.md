@@ -25,6 +25,9 @@ Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
+2017-08-27
+- Timezone setting adjustment and some minor changes to docker build.
+
 2017-08-03
 - Update to z80pack 1.35.
 

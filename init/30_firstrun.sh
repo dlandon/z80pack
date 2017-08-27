@@ -100,11 +100,13 @@ chown -R root:root /root/z80pack
 chmod 755 /root
 
 # Get docker env timezone and set system timezone
-echo "Setting the timezone to : $TZ"
-echo $TZ > /etc/timezone
-ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
-dpkg-reconfigure tzdata
-echo "Date: `date`"
+if [[ $(cat /etc/timezone) != "$TZ" ]] ; then
+	echo "Setting the timezone to : $TZ"
+	echo $TZ > /etc/timezone
+	ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
+	dpkg-reconfigure tzdata
+	echo "Date: `date`"
+fi
 
 # Start shell in a box
 echo "Starting Shell in a Box..."
