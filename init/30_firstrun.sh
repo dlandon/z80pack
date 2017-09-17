@@ -20,6 +20,14 @@ else
 	echo "File cpm14 already exists"
 fi
 
+# Move cpm1975 script if it doesn't exist.
+if [ ! -f /config/cpm1975 ]; then
+	echo "Copying cpm1975"
+	cp /root/z80pack/cpmsim/cpm1975 /config/
+else
+	echo "File cpm1975 already exists"
+fi
+
 # Move cpm2 script if it doesn't exist.
 if [ ! -f /config/cpm2 ]; then
 	echo "Copying cpm2"
@@ -34,6 +42,14 @@ if [ ! -f /config/cpm3 ]; then
 	cp /root/z80pack/cpmsim/cpm3 /config/
 else
 	echo "File cpm3 already exists"
+fi
+
+# Move cpm3-8080 script if it doesn't exist.
+if [ ! -f /config/cpm3-8080 ]; then
+	echo "Copying cpm3-8080"
+	cp /root/z80pack/cpmsim/cpm3-8080 /config/
+else
+	echo "File cpm3-8080 already exists"
 fi
 
 # Move mpm script if it doesn't exist.
@@ -67,6 +83,11 @@ rm /root/z80pack/cpmsim/cpm14
 ln -sf /config/cpm14 /root/z80pack/cpmsim/cpm14
 chmod +x /config/cpm14
 
+# cpm1975
+rm /root/z80pack/cpmsim/cpm1975
+ln -sf /config/cpm1975 /root/z80pack/cpmsim/cpm1975
+chmod +x /config/cpm1975
+
 # cpm2
 rm /root/z80pack/cpmsim/cpm2
 ln -sf /config/cpm2 /root/z80pack/cpmsim/cpm2
@@ -76,6 +97,11 @@ chmod +x /config/cpm2
 rm /root/z80pack/cpmsim/cpm3
 ln -sf /config/cpm3 /root/z80pack/cpmsim/cpm3
 chmod +x /config/cpm3
+
+# cpm3-8080
+rm /root/z80pack/cpmsim/cpm3-8080
+ln -sf /config/cpm3-8080 /root/z80pack/cpmsim/cpm3-8080
+chmod +x /config/cpm3-8080
 
 # mpm
 rm /root/z80pack/cpmsim/mpm
