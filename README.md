@@ -25,6 +25,9 @@ Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
+2017-09-24
+- Modifications to dockerfile for auto build.
+
 2017-09-17
 - Added scripts to /config for cpm1975 and cpm3-8080.
 
