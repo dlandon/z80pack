@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.9.22
 
-MAINTAINER dlandon
+LABEL maintainer="dlandon"
 
 ENV \
 	DEBCONF_NONINTERACTIVE_SEEN="true" \
@@ -68,7 +68,7 @@ RUN	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
 	apt-get clean -y && \
 	apt-get -y autoremove
 
-VOLUME /config
+VOLUME ["/config"]
 
 EXPOSE 4200
 
