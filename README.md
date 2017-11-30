@@ -25,8 +25,11 @@ Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
+2017-11-30
+- Update base image.
+
 2017-09-26
-- Change to dlandon/baseimage.
+- Change to dlandon/baseimage - phusion 9.22.
 
 2017-09-24
 - Modifications to dockerfile for auto build.
