@@ -9,17 +9,15 @@ RUN	rm -rf /etc/service/cron /etc/service/syslog-ng
 RUN	apt-get update && \
 	apt-get -y upgrade && \
 	apt-get -y dist-upgrade && \
-	apt-get -y install wget tzdata make gcc nano
-
-RUN	apt-get -y install libncurses5-dev libncursesw5-dev
-
-RUN	apt-get -y install shellinabox sudo
+	apt-get -y install wget tzdata make gcc nano && \
+	apt-get -y install libncurses5-dev libncursesw5-dev && \
+	apt-get -y install shellinabox sudo
 
 RUN	cd ~ && \
-	wget http://www.autometer.de/unix4fun/z80pack/ftp/z80pack-1.35.tgz && \
-	tar xzvf z80pack-1.35.tgz && \
-	mv z80pack-1.35 z80pack	&& \
-	rm z80pack-1.35.tgz
+	wget http://www.autometer.de/unix4fun/z80pack/ftp/z80pack-1.36.tgz && \
+	tar xzvf z80pack-1.36.tgz && \
+	mv z80pack-1.36 z80pack	&& \
+	rm z80pack-1.36.tgz
 
 RUN	cd ~/z80pack/cpmsim/srcsim && \
 	make -fMakefile.linux && \

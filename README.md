@@ -25,7 +25,10 @@ Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
-2017-11-30
+2017-12-14
+- Update to z80pack 1.36.
+
+22017-11-30
 - Update base image.
 
 2017-09-26
