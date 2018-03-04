@@ -25,6 +25,9 @@ Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
+2018-03-04
+- Update to phusion 10.0 image.
+
 2017-12-14
 - Update to z80pack 1.36.
 

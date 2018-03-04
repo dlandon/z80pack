@@ -53,7 +53,8 @@ RUN	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabo
 
 RUN	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
 	apt-get clean -y && \
-	apt-get -y autoremove
+	apt-get -y autoremove && \
+	rm -rf /tmp/* /var/tmp/*
 
 VOLUME ["/config"]
 
