@@ -2,6 +2,9 @@ FROM dlandon/baseimage
 
 LABEL maintainer="dlandon"
 
+ENV	Z80PACK_VERS="1.36"
+ENV	CPMTOOLS_VERS="2.20"
+
 COPY init /etc/my_init.d/
 
 RUN	rm -rf /etc/service/cron /etc/service/syslog-ng
@@ -14,10 +17,10 @@ RUN	apt-get update && \
 	apt-get -y install shellinabox sudo
 
 RUN	cd ~ && \
-	wget http://www.autometer.de/unix4fun/z80pack/ftp/z80pack-1.36.tgz && \
-	tar xzvf z80pack-1.36.tgz && \
-	mv z80pack-1.36 z80pack	&& \
-	rm z80pack-1.36.tgz
+	wget http://www.autometer.de/unix4fun/z80pack/ftp/z80pack-$Z80PACK_VERS.tgz && \
+	tar xzvf z80pack-$Z80PACK_VERS.tgz && \
+	mv z80pack-$Z80PACK_VERS z80pack	&& \
+	rm z80pack-$Z80PACK_VERS.tgz
 
 RUN	cd ~/z80pack/cpmsim/srcsim && \
 	make -fMakefile.linux && \
@@ -30,13 +33,13 @@ RUN	cd ~/z80pack/cpmsim/srctools && \
 	make clean
 
 RUN	cd ~ && \
-	wget http://www.moria.de/~michael/cpmtools/files/cpmtools-2.21-snapshot.tar.gz && \
-	tar xzvf cpmtools-2.21-snapshot.tar.gz && \
-	mv cpmtools-2.21 cpmtools && \
+	wget http://www.moria.de/~michael/cpmtools/files/cpmtools-$CPMTOOLS_VERS.tar.gz && \
+	tar xzvf cpmtools-$CPMTOOLS_VERS.tar.gz && \
+	mv cpmtools-$CPMTOOLS_VERS cpmtools && \
 	cd cpmtools && \
 	./configure && make && make install && \
 	cd ~ && \
-	rm cpmtools-2.21-snapshot.tar.gz && \
+	rm cpmtools-$CPMTOOLS_VERS.tar.gz && \
 	rm -r cpmtools
 
 RUN	cd ~/z80pack/cpmsim/disks/library && \
