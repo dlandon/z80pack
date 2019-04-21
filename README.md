@@ -24,9 +24,9 @@ You will be taken directly to the /root/z80pack/cpmsim directory.
 Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
+
 2019-01-31
 - CPM Tools version 2.2.
-
 
 2018-03-04
 - Update to phusion 10.0 image.
