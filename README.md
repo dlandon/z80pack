@@ -25,6 +25,9 @@ Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
+2019-09-05
+- Fix update script.
+
 2019-01-31
 - CPM Tools version 2.2.
 
