@@ -11,7 +11,6 @@ RUN	rm -rf /etc/service/cron /etc/service/syslog-ng
 
 RUN	apt-get update && \
 	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
-	apt-get -y dist-upgrade -o Dpkg::Options::="--force-confold" && \
 	apt-get -y install wget tzdata make gcc nano && \
 	apt-get -y install libncurses5-dev libncursesw5-dev && \
 	apt-get -y install shellinabox sudo
