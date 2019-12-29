@@ -25,6 +25,9 @@ Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
 Changes:
 
+2019-12-29
+- Update to phusion 10.2 image.
+
 2019-09-05
 - Fix update script.
 
