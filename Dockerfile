@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.10.2
+FROM phusion/baseimage:0.11
 
 LABEL maintainer="dlandon"
 
@@ -12,18 +12,20 @@ ENV	DEBCONF_NONINTERACTIVE_SEEN="true" \
 	TZ="Etc/UTC" \
 	TERM="xterm"
 
-ENV	Z80PACK_VERS="1.36"
-ENV	CPMTOOLS_VERS="2.20"
+ENV	Z80PACK_VERS="1.36" \
+	CPMTOOLS_VERS="2.20"
 
 COPY init /etc/my_init.d/
 
 RUN	rm -rf /etc/service/cron /etc/service/syslog-ng
 
 RUN	apt-get update && \
+	apt-get -y dist-upgrade -o Dpkg::Options::="--force-confold" && \
 	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
-	apt-get -y install wget tzdata make gcc nano && \
+	apt-get -y install wget tzdata make gcc nano sudo && \
 	apt-get -y install libncurses5-dev libncursesw5-dev && \
-	apt-get -y install shellinabox sudo
+	wget http://archive.ubuntu.com/ubuntu/pool/universe/s/shellinabox/shellinabox_2.14-1_amd64.deb && \
+	dpkg -i shellinabox_2.14-1_amd64.deb
 
 RUN	cd ~ && \
 	wget http://www.autometer.de/unix4fun/z80pack/ftp/z80pack-$Z80PACK_VERS.tgz && \
@@ -62,6 +64,7 @@ RUN	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabo
 	mv "/etc/shellinabox/options-enabled/00_White On Black.css" "/etc/shellinabox/options-enabled/00+White On Black.css"
 
 RUN	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
+	apt-mark hold shellinabox && \
 	apt-get clean -y && \
 	apt-get -y autoremove && \
 	rm -rf /tmp/* /var/tmp/* && \
