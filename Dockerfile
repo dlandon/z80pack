@@ -56,7 +56,8 @@ RUN	cd ~ && \
 RUN	cd ~/z80pack/cpmsim/disks/library && \
 	cp -p * ../backups
 
-RUN	useradd -d "/root/z80pack/cpmsim" "vintage" && \
+RUN	sed -i s#SHELL=/bin/sh#SHELL=/bin/bash#g /etc/default/useradd && \
+	useradd -d "/root/z80pack/cpmsim" "vintage" && \
 	adduser "vintage" sudo && \
 	echo "vintage:computer" | chpasswd
 
