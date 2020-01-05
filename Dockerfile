@@ -1,6 +1,16 @@
-FROM dlandon/baseimage
+FROM phusion/baseimage:0.10.2
 
 LABEL maintainer="dlandon"
+
+ENV	DEBCONF_NONINTERACTIVE_SEEN="true" \
+	DEBIAN_FRONTEND="noninteractive" \
+	DISABLE_SSH="true" \
+	HOME="/root" \
+	LC_ALL="C.UTF-8" \
+	LANG="en_US.UTF-8" \
+	LANGUAGE="en_US.UTF-8" \
+	TZ="Etc/UTC" \
+	TERM="xterm"
 
 ENV	Z80PACK_VERS="1.36"
 ENV	CPMTOOLS_VERS="2.20"
@@ -44,8 +54,6 @@ RUN	cd ~ && \
 RUN	cd ~/z80pack/cpmsim/disks/library && \
 	cp -p * ../backups
 
-RUN	chmod -R +x /etc/my_init.d/
-
 RUN	useradd -d "/root/z80pack/cpmsim" "vintage" && \
 	adduser "vintage" sudo && \
 	echo "vintage:computer" | chpasswd
@@ -56,8 +64,11 @@ RUN	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabo
 RUN	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
 	apt-get clean -y && \
 	apt-get -y autoremove && \
-	rm -rf /tmp/* /var/tmp/*
+	rm -rf /tmp/* /var/tmp/* && \
+	chmod +x /etc/my_init.d/*.sh
 
 VOLUME ["/config"]
 
 EXPOSE 4200
+
+CMD ["/sbin/my_init"]
