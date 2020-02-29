@@ -23,7 +23,10 @@ You will be taken directly to the /root/z80pack/cpmsim directory.
 
 Use the command 'sudo ./cpm' to run the simulator with root privileges.
 
-Changes:
+### Change Log:
+
+2020-02-29
+- Fix docker failure when it can't update.
 
 2019-12-29
 - Update to phusion 10.2 image.
