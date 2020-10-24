@@ -88,5 +88,5 @@ VOLUME ["/config"]
 FROM build13 as build14
 EXPOSE 4200
 
-FROM build14 as build15
+FROM build14
 CMD ["/sbin/my_init"]
