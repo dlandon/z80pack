@@ -1,5 +1,9 @@
 ## Change Log
 
+### 2021-02-090
+- Update to z80pack 1.37.
+- CPM Tools version 2.22.
+
 ### 2020-07-19
 - Update baseimage to bionic-1.0.0.
 

@@ -12,8 +12,8 @@ ENV	DEBCONF_NONINTERACTIVE_SEEN="true" \
 	LANGUAGE="en_US.UTF-8" \
 	TZ="Etc/UTC" \
 	TERM="xterm" \
-	Z80PACK_VERS="1.36" \
-	CPMTOOLS_VERS="2.20"
+	Z80PACK_VERS="1.37" \
+	CPMTOOLS_VERS="2.22"
 
 FROM build1 as build2
 COPY init /etc/my_init.d/
@@ -62,6 +62,7 @@ RUN	cd ~ && \
 
 FROM build8 as build9
 RUN	cd ~/z80pack/cpmsim/disks/library && \
+	mkdir -p ../backups && \
 	cp -p * ../backups
 
 FROM build9 as build10
