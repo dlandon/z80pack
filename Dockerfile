@@ -1,4 +1,4 @@
-FROM phusion/baseimage:bionic-1.0.0 as builder
+FROM phusion/baseimage:master as builder
 
 LABEL maintainer="dlandon"
 
@@ -26,9 +26,7 @@ RUN	apt-get update && \
 	apt-get -y dist-upgrade -o Dpkg::Options::="--force-confold" && \
 	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
 	apt-get -y install wget tzdata make gcc nano sudo && \
-	apt-get -y install libncurses5-dev libncursesw5-dev && \
-	wget http://archive.ubuntu.com/ubuntu/pool/universe/s/shellinabox/shellinabox_2.14-1_amd64.deb && \
-	dpkg -i shellinabox_2.14-1_amd64.deb
+	apt-get -y install libncurses5-dev libncursesw5-dev shellinabox
 
 FROM build4 as build5
 RUN	cd ~ && \
@@ -77,7 +75,6 @@ RUN	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabo
 
 FROM build11 as build12
 RUN	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
-	apt-mark hold shellinabox && \
 	apt-get clean -y && \
 	apt-get -y autoremove && \
 	rm -rf /tmp/* /var/tmp/* && \

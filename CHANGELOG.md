@@ -1,6 +1,10 @@
 ## Change Log
 
-### 2021-02-090
+### 2022-03-19
+- Update baseimage to Focal-1.2.0.
+- Update shellinabox to latest.
+
+### 2021-02-09
 - Update to z80pack 1.37.
 - CPM Tools version 2.22.
 
