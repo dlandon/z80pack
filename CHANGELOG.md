@@ -1,5 +1,8 @@
 ## Change Log
 
+### 2023-06-06
+- CPM Tools version 2.23.
+
 ### 2022-08-28
 - Refresh docker.
 

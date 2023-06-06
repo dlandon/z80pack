@@ -1,4 +1,4 @@
-FROM phusion/baseimage:1.2.0 as builder
+FROM phusion/baseimage:focal-1.2.0 as builder
 
 LABEL maintainer="dlandon"
 
@@ -13,7 +13,7 @@ ENV	DEBCONF_NONINTERACTIVE_SEEN="true" \
 	TZ="Etc/UTC" \
 	TERM="xterm" \
 	Z80PACK_VERS="1.37" \
-	CPMTOOLS_VERS="2.22"
+	CPMTOOLS_VERS="2.23"
 
 FROM build1 as build2
 COPY init /etc/my_init.d/
