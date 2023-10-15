@@ -1,4 +1,4 @@
-FROM phusion/baseimage:focal-1.2.0 as builder
+FROM phusion/baseimage:jammy-1.0.1 as builder
 
 LABEL maintainer="dlandon"
 
@@ -32,7 +32,7 @@ FROM build4 as build5
 RUN	cd ~ && \
 	wget http://www.autometer.de/unix4fun/z80pack/ftp/z80pack-$Z80PACK_VERS.tgz && \
 	tar xzvf z80pack-$Z80PACK_VERS.tgz && \
-	mv z80pack-$Z80PACK_VERS z80pack	&& \
+	mv z80pack-$Z80PACK_VERS z80pack && \
 	rm z80pack-$Z80PACK_VERS.tgz
 
 FROM build5 as build6
