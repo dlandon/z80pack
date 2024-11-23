@@ -1,4 +1,4 @@
-FROM phusion/baseimage:jammy-1.0.1
+FROM phusion/baseimage:jammy-1.0.4
 
 LABEL maintainer="dlandon"
 
@@ -19,10 +19,10 @@ COPY init /etc/my_init.d/
 RUN	rm -rf /etc/service/cron /etc/service/syslog-ng
 
 RUN	apt-get update && \
-	apt-get -y dist-upgrade -o Dpkg::Options::="--force-confold" && \
 	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
 	apt-get -y install wget tzdata make gcc nano sudo && \
-	apt-get -y install libncurses5-dev libncursesw5-dev shellinabox
+	apt-get -y install libncurses5-dev libncursesw5-dev shellinabox && \
+	apt-get -y dist-upgrade -o Dpkg::Options::="--force-confold"
 
 RUN	cd ~ && \
 	wget https://github.com/udo-munk/z80pack/archive/refs/tags/$Z80PACK_VERS.tar.gz && \
@@ -63,10 +63,10 @@ RUN	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabo
 	mv "/etc/shellinabox/options-enabled/00_White On Black.css" "/etc/shellinabox/options-enabled/00+White On Black.css"
 
 RUN	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
-	apt-get clean -y && \
 	apt-get -y autoremove && \
 	rm -rf /tmp/* /var/tmp/* && \
-	chmod +x /etc/my_init.d/*.sh
+	chmod +x /etc/my_init.d/*.sh && \
+	/etc/my_init.d/20_apt_update.sh
 
 VOLUME ["/config"]
 
