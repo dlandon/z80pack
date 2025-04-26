@@ -16,7 +16,7 @@ ENV	DEBCONF_NONINTERACTIVE_SEEN="true" \
 
 COPY init /etc/my_init.d/
 
-RUN	rm -rf /etc/service/cron /etc/service/syslog-ng
+RUN	rm -rf /etc/service/cron
 
 RUN	apt-get update && \
 	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
