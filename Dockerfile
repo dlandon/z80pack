@@ -12,13 +12,13 @@ ENV	DEBCONF_NONINTERACTIVE_SEEN="true" \
 	TZ="Etc/UTC" \
 	TERM="xterm" \
 	Z80PACK_VERS="1.37" \
-	CPMTOOLS_VERS="2.23"
+	CPMTOOLS_VERS="2.24"
 
 COPY init /etc/my_init.d/
 
 RUN	rm -rf /etc/service/cron
 
-RUN	apt-get update && \
+RUN	apt-get update --allow-releaseinfo-change && \
 	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
 	apt-get -y install wget tzdata make gcc nano sudo && \
 	apt-get -y install libncurses5-dev libncursesw5-dev shellinabox && \
@@ -41,7 +41,7 @@ RUN	cd ~/z80pack/cpmsim/srctools && \
 	make clean
 
 RUN	cd ~ && \
-	wget http://www.moria.de/~michael/cpmtools/files/cpmtools-$CPMTOOLS_VERS.tar.gz && \
+	wget --no-check-certificate http://www.moria.de/~michael/cpmtools/files/cpmtools-$CPMTOOLS_VERS.tar.gz && \
 	tar xzvf cpmtools-$CPMTOOLS_VERS.tar.gz && \
 	mv cpmtools-$CPMTOOLS_VERS cpmtools && \
 	cd cpmtools && \

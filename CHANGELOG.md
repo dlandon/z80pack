@@ -1,5 +1,8 @@
 ## Change Log
 
+### 2025-05-18
+- CPM Tools version 2.24.
+
 ### 2025-04-26
 - Refresh container.
 
