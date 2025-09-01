@@ -8,47 +8,46 @@ ENV	DEBCONF_NONINTERACTIVE_SEEN="true" \
 	HOME="/root" \
 	LC_ALL="C.UTF-8" \
 	LANG="en_US.UTF-8" \
-	LANGUAGE="en_US.UTF-8" \
 	TZ="Etc/UTC" \
 	TERM="xterm" \
 	Z80PACK_VERS="1.37" \
 	CPMTOOLS_VERS="2.24"
 
 COPY init /etc/my_init.d/
+COPY packages /root/packages/
 
 RUN	rm -rf /etc/service/cron
 
-RUN	apt-get update --allow-releaseinfo-change && \
+RUN apt-get update --allow-releaseinfo-change && \
+	apt-get install -y --no-install-recommends ca-certificates tzdata sudo nano shellinabox \
+		make gcc libncurses5-dev libncursesw5-dev && \
 	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
-	apt-get -y install wget tzdata make gcc nano sudo && \
-	apt-get -y install libncurses5-dev libncursesw5-dev shellinabox && \
-	apt-get -y dist-upgrade -o Dpkg::Options::="--force-confold"
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN	cd ~ && \
-	wget https://github.com/udo-munk/z80pack/archive/refs/tags/$Z80PACK_VERS.tar.gz && \
-	tar xzvf $Z80PACK_VERS.tar.gz && \
-	mv z80pack-$Z80PACK_VERS z80pack && \
-	rm $Z80PACK_VERS.tar.gz
-
-RUN	cd ~/z80pack/cpmsim/srcsim && \
-	make -fMakefile.linux && \
-	make -fMakefile.linux clean
-
-RUN	cd ~/z80pack/cpmsim/srctools && \
-	sed -i "s/"#INSTALLDIR="/"INSTALLDIR=/"" Makefile && \
-	make && \
-	make install && \
-	make clean
-
-RUN	cd ~ && \
-	wget --no-check-certificate http://www.moria.de/~michael/cpmtools/files/cpmtools-$CPMTOOLS_VERS.tar.gz && \
-	tar xzvf cpmtools-$CPMTOOLS_VERS.tar.gz && \
-	mv cpmtools-$CPMTOOLS_VERS cpmtools && \
-	cd cpmtools && \
-	./configure && make && make install && \
-	cd ~ && \
-	rm cpmtools-$CPMTOOLS_VERS.tar.gz && \
-	rm -r cpmtools
+# Build z80pack and cpmtools
+RUN cd /root && \
+    # z80pack
+    tar xzf packages/z80pack-${Z80PACK_VERS}.tar.gz && \
+    mv z80pack-${Z80PACK_VERS} z80pack && \
+    cd z80pack/cpmsim/srcsim && \
+    make -f Makefile.linux && make -f Makefile.linux clean && \
+    cd ../srctools && \
+    sed -i 's/#INSTALLDIR=/INSTALLDIR=/' Makefile && \
+    make && make install && make clean && \
+    # cpmtools
+    cd /root && \
+    tar xzf packages/cpmtools-${CPMTOOLS_VERS}.tar.gz && \
+    mv cpmtools-${CPMTOOLS_VERS} cpmtools && \
+    cd cpmtools && \
+    ./configure && make && make install && \
+    # cleanup sources and tarballs but keep /root/z80pack
+    cd /root && rm -rf cpmtools /root/packages && \
+    # remove build-only tools
+    apt-get purge -y make gcc libncurses5-dev libncursesw5-dev && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN	cd ~/z80pack/cpmsim/disks/library && \
 	mkdir -p ../backups && \
@@ -62,9 +61,7 @@ RUN	sed -i s#SHELL=/bin/sh#SHELL=/bin/bash#g /etc/default/useradd && \
 RUN	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabox/options-enabled/00_Black on White.css" && \
 	mv "/etc/shellinabox/options-enabled/00_White On Black.css" "/etc/shellinabox/options-enabled/00+White On Black.css"
 
-RUN	apt-get -y remove wget make gcc libncurses5-dev libncursesw5-dev && \
-	apt-get -y autoremove && \
-	rm -rf /tmp/* /var/tmp/* && \
+RUN	rm -rf /tmp/* /var/tmp/* && \
 	chmod +x /etc/my_init.d/*.sh && \
 	/etc/my_init.d/20_apt_update.sh
 

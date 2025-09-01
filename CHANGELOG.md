@@ -1,5 +1,9 @@
 ## Change Log
 
+### 2025-08-30
+- Docker container build cleanup.
+- Maintain copies of the z80pack and cpmtools tarballs locally.
+
 ### 2025-05-18
 - CPM Tools version 2.24.
 
