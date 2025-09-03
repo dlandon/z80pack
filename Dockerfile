@@ -20,10 +20,7 @@ RUN	rm -rf /etc/service/cron
 
 RUN apt-get update --allow-releaseinfo-change && \
 	apt-get install -y --no-install-recommends ca-certificates tzdata sudo nano shellinabox \
-		make gcc libncurses5-dev libncursesw5-dev && \
-	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
-	apt-get clean && \
-	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+		make gcc libncurses5-dev libncursesw5-dev
 
 # Build z80pack and cpmtools
 RUN cd /root && \
@@ -44,10 +41,7 @@ RUN cd /root && \
     # cleanup sources and tarballs but keep /root/z80pack
     cd /root && rm -rf cpmtools /root/packages && \
     # remove build-only tools
-    apt-get purge -y make gcc libncurses5-dev libncursesw5-dev && \
-    apt-get autoremove -y && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    apt-get purge -y make gcc libncurses5-dev libncursesw5-dev
 
 RUN	cd ~/z80pack/cpmsim/disks/library && \
 	mkdir -p ../backups && \
@@ -61,9 +55,11 @@ RUN	sed -i s#SHELL=/bin/sh#SHELL=/bin/bash#g /etc/default/useradd && \
 RUN	mv "/etc/shellinabox/options-enabled/00+Black on White.css" "/etc/shellinabox/options-enabled/00_Black on White.css" && \
 	mv "/etc/shellinabox/options-enabled/00_White On Black.css" "/etc/shellinabox/options-enabled/00+White On Black.css"
 
-RUN	rm -rf /tmp/* /var/tmp/* && \
-	chmod +x /etc/my_init.d/*.sh && \
-	/etc/my_init.d/20_apt_update.sh
+RUN	chmod +x /etc/my_init.d/*.sh && \
+	apt-get -y upgrade -o Dpkg::Options::="--force-confold" && \
+	apt-get -y autoremove && \
+	apt-get -y clean && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 VOLUME ["/config"]
 

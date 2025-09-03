@@ -1,6 +1,6 @@
 ## Change Log
 
-### 2025-08-30
+### 2025-09-03
 - Docker container build cleanup.
 - Maintain copies of the z80pack and cpmtools tarballs locally.
 
